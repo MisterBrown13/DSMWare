@@ -41,6 +41,8 @@ $(document).ready(function(){
    $linklistaddress = "http://localhost:81/DSMWare/list.html";
    $endlink = '">';
    $enddiv = '</div>';
+   $newul = '<ul id="myList';
+   $endul = '</ul>';
    $.getJSON($racine+"me/lists.json",function(data)
    {
        $x = location.search;
@@ -48,8 +50,29 @@ $(document).ready(function(){
        //alert($urlParams.id);
        if($x)
 	{
-	   	  $i=$urlParams.id;
-		  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?id=" + $i + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $insertdelete +  "</h2>" +$enddiv);
+	    $i=$urlParams.id;
+	    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + $i + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $insertdelete +  "</h2>" + $newul + $i + '">'+ $endul +$enddiv);
+	    $.getJSON($racine+"me/tasks.json",function(data2)
+	    {
+		//alert(data2[$i].list_id);
+		//alert(data[$i].id);
+		$j=0;
+		//$(".row").append("<p>"+ caca +"</p>");
+		while(data2[$j])
+		{
+		    if(data[$i].id == data2[$j].list_id)
+			{
+			    //$(".list").append("<p>"+ caca +"</p>");
+			    $node=document.createElement("LI");
+			    $textnode=document.createTextNode(data2[$j].title);
+			    $node.appendChild($textnode);
+			    document.getElementById("myList"+$i).appendChild($node);
+			    //alert("wesh ziva");
+			}
+			$j++;
+		}
+	    });
+	    
 	}
 	else
 	 {
