@@ -5,13 +5,22 @@ $(document).ready(function(){
    //$urldetest= "http://ip.jsontest.com/";
    $racine = "http://localhost:81/DSMWare/";
    $newdivtitle = '<div class="col-md-4">';
-   $enddiv = '</div>'
+   $insertdelete = '<button type="button" class="btn btn-default btn-lg">'+
+		    '<span class="glyphicon glyphicon-remove">'+'</span>'+ 'Remove'
+		    '</button>'; 
+   $insertadd = '<button type="button" class="btn btn-default btn-lg">'+
+		    '<span class="glyphicon glyphicon-plus">'+'</span>'+ 'Add'+
+		   ' </button>';
+   $newlink = '<a href="';
+   $linklistaddress = "http://localhost:81/DSMWare/list.html";
+   $endlink = '">';
+   $enddiv = '</div>';
    $.getJSON($racine+"me/lists.json",function(data)
    {
        $i = 0;
        while(data[$i])
 	{
-	  $(".row").append($newdivtitle + "<h2>"+ data[$i].title +"</h2>" + $enddiv);
+	  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?=" + $i + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $insertdelete +  "</h2>" +$enddiv);
 	  $i++;
 	}
      //alert(data[0].title);
