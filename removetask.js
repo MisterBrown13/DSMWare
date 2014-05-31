@@ -49,6 +49,15 @@ $(document).ready(function(){
    $enddiv = '</div>';
    $newul = '<ul id="myList';
    $endul = '</ul>';
+   
+    $x = location.search;
+   $urlParams = parseURLParams($x);
+   $.ajaxSetup({
+    headers : {
+    'Authorization' : 'Bearer '+$urlParams.token
+    }
+    });
+   
    $.getJSON($racine+"me/lists.json",function(data)
    {
        $x = location.search;
@@ -68,6 +77,11 @@ $(document).ready(function(){
 			}
 			$i++;
 		}
+		$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
 	    $.getJSON($racine+"me/tasks.json",function(data2)
 	    {
 		
@@ -141,9 +155,13 @@ $(document).ready(function(){
 	 alert(this.id);
 	 if(this.value == "remove_list")
 	     {
-		     //alert("caca tu delete une task");
+		$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
 		$.ajax({
-		url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/"+this.id,
+		url: "http://api.wunderlist.com/me/list/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
@@ -174,9 +192,13 @@ $(document).ready(function(){
 
 function remove_task(id)
 {
-    alert(id);
+    		$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
     $.ajax({
-		url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/task/"+id,
+		url: "http://api.wunderlist.com/me/task/"+id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");

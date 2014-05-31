@@ -51,6 +51,13 @@ $(document).ready(function(){
    $endul = '</ul>';
    //alert('test');
    // 1- récupération de la tache avec le bon id 
+     $x = location.search;
+   $urlParams = parseURLParams($x);
+   $.ajaxSetup({
+    headers : {
+    'Authorization' : 'Bearer '+$urlParams.token
+    }
+    });
    $.getJSON($racine+"me/tasks.json",function(data)
    {
        $i = 0;
@@ -72,6 +79,11 @@ $(document).ready(function(){
 		   }
 	       $i++;
 	   }
+	   	$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
 	  $.getJSON($racine+"me/lists.json",function(data2)
 	    {
 		$j=0;
@@ -119,9 +131,14 @@ dataString = $("#edit_task_form").serialize();
             alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
+	    	$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
             $.ajax({
                 type: "PUT",
-                url: "/me/task/"+$task_id,
+                url: "http://api.wunderlist.com/me/task/"+$task_id,
                 data: dataString,
                 dataType: "json",
                 

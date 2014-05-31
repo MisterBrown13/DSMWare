@@ -49,6 +49,14 @@ $(document).ready(function(){
    $enddiv = '</div>';
    $newul = '<ul id="myList';
    $endul = '</ul>';
+    $x = location.search;
+   $urlParams = parseURLParams($x);
+   $.ajaxSetup({
+    headers : {
+    'Authorization' : 'Bearer '+$urlParams.token
+    }
+    });
+   
    $.getJSON($racine+"me/lists.json",function(data)
    {
        $x = location.search;
@@ -68,6 +76,11 @@ $(document).ready(function(){
 			}
 			$i++;
 		}
+		$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
 	    $.getJSON($racine+"me/tasks.json",function(data2)
 	    {
 		
@@ -147,9 +160,13 @@ $(document).ready(function(){
 	 //alert(this.id);
 	 if(this.value == "remove_list")
 	     {
-		     //alert("caca tu delete une task");
+		   $.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
 		$.ajax({
-		url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/"+this.id,
+		url: "http://api.wunderlist.com/me/list/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
@@ -202,9 +219,14 @@ dataString = $("#add_list_form").serialize();
             alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
+	    	 $.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
             $.ajax({
                 type: "POST",
-                url: "/me/lists",
+                url: "http://api.wunderlist.com/me/lists",
                 data: dataString,
                 dataType: "json",
                 
