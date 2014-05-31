@@ -58,7 +58,7 @@ $(document).ready(function(){
     }
     });
    
-   $.getJSON($racine+"me/lists.json",function(data)
+   $.getJSON("http://api.wunderlist.com/me/lists.json",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -82,7 +82,7 @@ $(document).ready(function(){
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	    $.getJSON($racine+"me/tasks.json",function(data2)
+	    $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data2)
 	    {
 		
 		$j=0;

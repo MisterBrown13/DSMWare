@@ -56,7 +56,7 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON($racine+"me/lists.json",function(data)
+   $.getJSON("http://api.wunderlist.com/me/lists.json",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -81,7 +81,7 @@ $(document).ready(function(){
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	    $.getJSON($racine+"me/tasks.json",function(data2)
+	    $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data2)
 	    {
 		
 		$j=0;
@@ -166,7 +166,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "http://api.wunderlist.com/me/list/"+this.id,
+		url: "https://api.wunderlist.com/me/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");

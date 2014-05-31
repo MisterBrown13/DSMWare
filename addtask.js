@@ -57,7 +57,7 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON($racine+"me/lists.json",function(data)
+   $.getJSON("http://api.wunderlist.com/me/lists.json",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -82,7 +82,7 @@ $(document).ready(function(){
 	    'Authorization' : 'Bearer '+$token
 	    }
 	    });
-	    $.getJSON($racine+"me/tasks.json",function(data2)
+	    $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data2)
 	    {
 		
 		$j=0;
@@ -149,7 +149,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "http://api.wunderlist.com/me/list/"+this.id,
+		url: "http://api.wunderlist.com/me/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
@@ -185,26 +185,28 @@ $( "#add_task_form" ).submit(function( event ) {
  //alert($('#add_task_form').serialize());
   // Stop form from submitting normally
   event.preventDefault();
- alert("caca");
+ //alert("caca");
 
 dataString = $("#add_task_form").serialize();
             //alert("ok");
             //get the form data using another method
             var task = $("input#task").val();
 	    $list_id=$urlParams.id;
-            dataString = '{"title"="' + task +'", "list_id"="'+$list_id+'"}';
-            alert(dataString);
+            dataString = 'title=' + task +'&list_id='+$list_id +'';
+            //alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
 		$.ajaxSetup({
 		headers : {
-		'Authorization' : 'Bearer '+$token
+		'Authorization' : 'Bearer '+$token,
+		'Content-Type' : "application/x-www-form-urlencoded"
 		}
 		});
+		alert('test');
 	    
             $.ajax({
                 type: "POST",
-                url: "http://api.wunderlist.com/me/tasks",
+                url: "https://api.wunderlist.com/me/tasks",
                 data: dataString,
                 dataType: "json",
                 

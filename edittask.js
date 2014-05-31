@@ -58,7 +58,7 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON($racine+"me/tasks.json",function(data)
+   $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data)
    {
        $i = 0;
        $x = location.search;
@@ -84,7 +84,7 @@ $(document).ready(function(){
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	  $.getJSON($racine+"me/lists.json",function(data2)
+	  $.getJSON("https://api.wunderlist.com/me/lists.json",function(data2)
 	    {
 		$j=0;
 		//alert($list_id);
@@ -127,18 +127,19 @@ dataString = $("#edit_task_form").serialize();
             //get the form data using another method
             var task = $("input#task").val();
 	    $task_id=$urlParams.id;
-            dataString = '{"note"="' + task +'", "task_id"="'+$task_id+'"}';
+            dataString = 'note=' + task;
             alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
 	    	$.ajaxSetup({
 		headers : {
-		'Authorization' : 'Bearer '+$token
+		'Authorization' : 'Bearer '+$token,
+		'Content-Type' : "application/x-www-form-urlencoded"
 		}
 		});
             $.ajax({
                 type: "PUT",
-                url: "http://api.wunderlist.com/me/task/"+$task_id,
+                url: "https://api.wunderlist.com/me/"+$task_id,
                 data: dataString,
                 dataType: "json",
                 
