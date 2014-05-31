@@ -39,7 +39,8 @@ $(document).ready(function(){
    $enddeletelist = '"class="btn btn-default btn-lg">'+
    '<span class="glyphicon glyphicon-remove">'+'</span>'+ 'Remove list'
    '</button>'; 
-   $insertadd = '<button type="buttonaddtask" value="add_task" class="btn btn-default btn-lg">'+
+   $newadd = '<button type="buttonaddtask" value="add_task" id="';
+   $endadd =  '" class="btn btn-default btn-lg">'+
 		    '<span class="glyphicon glyphicon-plus">'+'</span>'+ 'Add'+
 		   ' </button>';
    $newlink = '<a href="';
@@ -62,18 +63,19 @@ $(document).ready(function(){
 		{
 		    if(data[$i].id==$list_id)
 			{
-			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
+			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
 			}
 			$i++;
 		}
 	    $.getJSON($racine+"me/tasks.json",function(data2)
 	    {
-		//alert(data2[$i].list_id);
-		//alert(data[$i].id);
+		
 		$j=0;
+		//alert($j);
 		//$(".row").append("<p>"+ caca +"</p>");
 		while(data2[$j])
 		{
+		
 		    if($list_id == data2[$j].list_id)
 			{
 			    //$(".list").append("<p>"+ caca +"</p>");
@@ -81,11 +83,12 @@ $(document).ready(function(){
 			    $node.setAttribute("id", data2[$j].id);
 			    $textnode=document.createTextNode(data2[$j].title);
 			    $node.appendChild($textnode);
-			    document.getElementById("myList"+$data[$i].id).appendChild($node);
+			    document.getElementById("myList"+$list_id).appendChild($node);
 			    //alert("wesh ziva");
 			}
 			$j++;
 		}
+		//alert($j);
 	    });
 	    
 	}
@@ -131,7 +134,7 @@ $(document).ready(function(){
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
-		    //rediriger vers les listes
+		    window.location = "http://localhost:81/DSMWare/list.html";
 		}
 		});
 	     }
@@ -140,12 +143,15 @@ $(document).ready(function(){
 	    {
 		// renvoyer sur une page avec formulaire 
 		// puis faire post /me/task avec les données
+		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id;
 	    }
 	    
-	if(this.value == "remove_task")
+	if(this.value == "delete_task")
 	    {
 		// renvoyer sur une page pour sélectionner la tache 
 		// puis faire delete /me/task/task_id
+		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id;
+
 	    }
      });
    });
