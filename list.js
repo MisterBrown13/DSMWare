@@ -31,14 +31,15 @@ $(document).ready(function(){
    //$urldetest= "http://ip.jsontest.com/";
    $racine = "http://localhost:81/DSMWare/";
    $newdivtitle = '<div class="col-md-4">';
-   $newdeletetask = '<button type="buttondeltask" onClick="deleteTask(this.id)" id="'; 
+   $newdeletetask = '<button type="buttondeltask" value="delete_task" id="'; 
    $enddeletetask = '" class="btn btn-default btn-lg">'+
 		    '<span class="glyphicon glyphicon-remove">'+'</span>'+ 'Remove task'
 		    '</button>'; 
-   $insertdeletelist = '<button type="buttondellist" onClick="deleteList(this.id)" class="btn btn-default btn-lg">'+
+   $newdeletelist = '<button type="buttondellist" value="remove_list" id="';
+   $enddeletelist = '"class="btn btn-default btn-lg">'+
    '<span class="glyphicon glyphicon-remove">'+'</span>'+ 'Remove list'
    '</button>'; 
-   $insertadd = '<button type="buttonaddtask" onClick="addTask(this.id)" class="btn btn-default btn-lg">'+
+   $insertadd = '<button type="buttonaddtask" value="add_task" class="btn btn-default btn-lg">'+
 		    '<span class="glyphicon glyphicon-plus">'+'</span>'+ 'Add'+
 		   ' </button>';
    $newlink = '<a href="';
@@ -54,8 +55,17 @@ $(document).ready(function(){
        //alert($urlParams.id);
        if($x)
 	{
-	    $i=$urlParams.id;
-	    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + $i + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $newdeletetask + $i +$enddeletetask + " " + $insertdeletelist + "</h2>" + $newul + $i + '">'+ $endul +$enddiv);
+	    $list_id=$urlParams.id;
+	    //alert($list_id);
+	    $i = 0;
+	    while(data[$i])
+		{
+		    if(data[$i].id==$list_id)
+			{
+			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>"+" " + $insertadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
+			}
+			$i++;
+		}
 	    $.getJSON($racine+"me/tasks.json",function(data2)
 	    {
 		//alert(data2[$i].list_id);
@@ -64,14 +74,14 @@ $(document).ready(function(){
 		//$(".row").append("<p>"+ caca +"</p>");
 		while(data2[$j])
 		{
-		    if(data[$i].id == data2[$j].list_id)
+		    if($list_id == data2[$j].list_id)
 			{
 			    //$(".list").append("<p>"+ caca +"</p>");
 			    $node=document.createElement("LI");
 			    $node.setAttribute("id", data2[$j].id);
 			    $textnode=document.createTextNode(data2[$j].title);
 			    $node.appendChild($textnode);
-			    document.getElementById("myList"+$i).appendChild($node);
+			    document.getElementById("myList"+$data[$i].id).appendChild($node);
 			    //alert("wesh ziva");
 			}
 			$j++;
@@ -84,7 +94,7 @@ $(document).ready(function(){
        $i = 0;
        while(data[$i])
 	{
-	  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?id=" + $i + $endlink + data[$i].title  + "</a>" +  "</h2>" +$enddiv);
+	  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>" +  "</h2>" +$enddiv);
 	  $i++;
 	}
     }
@@ -110,37 +120,34 @@ $(document).ready(function(){
 //      //$("h1").append(" <b>"+ data.ip +"</b>.");
 //    });
 //  });
-
+     $("button").click(function(e){
+	 alert(this.value);
+	 alert(this.id);
+	 if(this.value == "remove_list")
+	     {
+		     //alert("caca tu delete une task");
+		$.ajax({
+		url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/"+this.id,
+		type: 'DELETE',
+		success: function(result) {
+		    alert("ok");
+		    //rediriger vers les listes
+		}
+		});
+	     }
+	     
+	if(this.value == "add_task")
+	    {
+		// renvoyer sur une page avec formulaire 
+		// puis faire post /me/task avec les données
+	    }
+	    
+	if(this.value == "remove_task")
+	    {
+		// renvoyer sur une page pour sélectionner la tache 
+		// puis faire delete /me/task/task_id
+	    }
+     });
    });
 });
 
-function deleteTask(task_id)
-{
-    alert("caca tu delete une task");
-    $.ajax({
-    url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/task/"+list_id,
-    type: 'DELETE',
-    success: function(result) {
-        alert("ok");
-    }
-});
-}
-
-
-function deleteList(list_id)
-{
-    alert("caca delete list");
-   $.ajax({
-    url: "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/"+list_id,
-    type: 'DELETE',
-    success: function(result) {
-        alert("ok");
-    }
-}); 
-    
-}
-
-function addTask(list_id)
-{
-    alert("ajout de tache");
-}
