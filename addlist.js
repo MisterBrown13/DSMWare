@@ -57,13 +57,14 @@ $(document).ready(function(){
        if($x)
 	{
 	    $list_id=$urlParams.id;
+	    $token=$urlParams.token;
 	    //alert($list_id);
 	    $i = 0;
 	    while(data[$i])
 		{
 		    if(data[$i].id==$list_id)
 			{
-			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
+			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + '&token='+ $token + $endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
 			}
 			$i++;
 		}
@@ -152,7 +153,7 @@ $(document).ready(function(){
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
-		    window.location = "http://localhost:81/DSMWare/list.html";
+		    window.location = "http://localhost:81/DSMWare/list.html?token="+$token;
 		}
 		});
 	     }
@@ -161,20 +162,20 @@ $(document).ready(function(){
 	    {
 		// renvoyer sur une page avec formulaire 
 		// puis faire post /me/task avec les données
-		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id;
+		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id+"&token="+$token;
 	    }
 	    
 	if(this.value == "delete_task")
 	    {
 		// renvoyer sur une page pour sélectionner la tache 
 		// puis faire delete /me/task/task_id
-		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id;
+		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id+"&token="+$token;
 
 	    }
 	    
 	 if(this.value == "add_list")
 	     {
-		window.location = "http://localhost:81/DSMWare/addlist.html";
+		window.location = "http://localhost:81/DSMWare/addlist.html?token="+$token;
 	     }
      });
    });
@@ -183,7 +184,7 @@ $(document).ready(function(){
 function edit_task(task_id)
 {
     $list_id=$urlParams.id;
-    window.location = "http://localhost:81/DSMWare/edittask.html?id="+task_id;
+    window.location = "http://localhost:81/DSMWare/edittask.html?id="+task_id+"&token="+$token;
 }
 
 $( "#add_list_form" ).submit(function( event ) {

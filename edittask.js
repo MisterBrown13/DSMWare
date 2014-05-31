@@ -57,9 +57,10 @@ $(document).ready(function(){
        $x = location.search;
        $urlParams = parseURLParams($x);
        //alert($urlParams);
-       if($x)
+       if($urlParams.id)
 	{
 	    $task_id=$urlParams.id;
+	    $token=$urlParams.token;
 	}
 	//alert($task_id);
        while(data[$i])
@@ -85,7 +86,7 @@ $(document).ready(function(){
 			$j++;
 		    }
 		    //faire l'affichage ici du nom + la tache + le champ pour la modif'
-		    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data2[$f].id + $endlink + data2[$f].title  + "</a>"+" " + $newadd + data2[$f].id +$endadd + " " + $newdeletetask +  data2[$f].id +$enddeletetask + " " + $newdeletelist + data2[$f].id + $enddeletelist + "</h2>" + $newul + data2[$f].id + '">'+ $endul +$enddiv);
+		    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data2[$f].id + '&token='+ $token +$endlink + data2[$f].title  + "</a>"+" " + $newadd + data2[$f].id +$endadd + " " + $newdeletetask +  data2[$f].id +$enddeletetask + " " + $newdeletelist + data2[$f].id + $enddeletelist + "</h2>" + $newul + data2[$f].id + '">'+ $endul +$enddiv);
 
 		    //affichage de la tache
 		    $node=document.createElement("LI");
@@ -128,7 +129,7 @@ dataString = $("#edit_task_form").serialize();
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
                      if(data.success){
-			    window.location = "http://localhost:81/DSMWare/list.html";
+			    window.location = "http://localhost:81/DSMWare/list.html?token="+$token;
                      }
                      //display error message
                      else {
