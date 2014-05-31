@@ -33,12 +33,13 @@ function doFunction(){
 					  if(typeof(tmp[1]) != "undefined") { 
 						 //$('#login').val(tmp[1]) ;
 						 //$('#pwd').val(tmp[2]) ;
-						 alert("big caca");
+						 //alert("big caca");
 					  } 
 					  var response = tmp[7].split(":");
 					  token = response[1].split("\"");
-					  alert(token[1]); 
-					  document.getElementById("token0").value = token[1];
+					  //alert(token[1]); 
+					  //document.getElementById("token0").value = token[1];
+					  window.location.href = 'list.html?token='+token[1];
 				   } 
 				} 
 				 

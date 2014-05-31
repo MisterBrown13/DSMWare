@@ -60,7 +60,8 @@
       <div class="row">
 		 <div class="navbar-collapse collapse">
 		
-		   <form action="list.html" method="post" enctype="multipart/form-data">
+          <form class="navbar-form navbar-left" role="form">
+
             <div class="form-group">
               <input type="text" id="login" placeholder="Email" class="form-control">
             </div>
@@ -70,13 +71,14 @@
 			
 			<input type="button" class="btn btn-success" name="Go !" value="Go !" onclick="doFunction()" style="background-color:#3cb371" style="color:white; font-weight:bold"onclick>
 			<!-- <input type="button" class="btn btn-success" name="Go !" value="Go !" onclick="self.location.href='list.html'" style="background-color:#3cb371" style="color:white; font-weight:bold"onclick> -->
-			<div  id="token0" value="v"></div>
-			
 
-		  </form>
+          </form>
+
         </div><!--/.navbar-collapse -->
       </div>
-
+			<form action="list.html">
+			<input type="hidden" name="token"  value="" />
+			</form>
       <hr>
 
       <footer>
