@@ -85,6 +85,24 @@ $(document).ready(function(){
 			    $node.appendChild($textnode);
 			    document.getElementById("myList"+$list_id).appendChild($node);
 			    //alert("wesh ziva");
+			    //$(".list").append("<p>"+ caca +"</p>");
+//			    $node=document.createElement("LI");
+			    $node2=document.createElement("button");
+			    $node3=document.createElement("span");
+//			    $node.setAttribute("id", data2[$j].id);
+			    $node2.setAttribute("id", data2[$j].id);
+			    $node3.setAttribute("class", "glyphicon glyphicon-pencil");
+			    $node2.setAttribute("class","btn btn-default btn-lg");
+			    $node2.setAttribute("value","edit_one_task");
+//			    //$node2.setAttribute("type","edit_one_task");
+			    $node2.setAttribute("onClick","edit_task(this.id)");
+//			    $textnode=document.createTextNode(data2[$j].title);
+			    $textnode2=document.createTextNode('Edit');
+//			    $node.appendChild($textnode);
+			    $node2.appendChild($textnode2);
+			    $node2.appendChild($node3);
+//			    document.getElementById("myList"+$list_id).appendChild($node);
+			    document.getElementById("myList"+$list_id).appendChild($node2);
 			}
 			$j++;
 		}
@@ -156,4 +174,10 @@ $(document).ready(function(){
      });
    });
 });
+
+function edit_task(task_id)
+{
+    $list_id=$urlParams.id;
+    window.location = "http://localhost:81/DSMWare/edittask.html?id="+task_id;
+}
 
