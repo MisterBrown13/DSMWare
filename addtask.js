@@ -49,7 +49,8 @@ $(document).ready(function(){
    $enddiv = '</div>';
    $newul = '<ul id="myList';
    $endul = '</ul>';
-   $x = location.search;
+   
+     $x = location.search;
    $urlParams = parseURLParams($x);
    $.ajaxSetup({
     headers : {
@@ -61,26 +62,26 @@ $(document).ready(function(){
        $x = location.search;
        $urlParams = parseURLParams($x);
        //alert($urlParams.id);
-       //alert($urlParams.token);
-       $token = $urlParams.token;
        if($urlParams.id)
 	{
 	    $list_id=$urlParams.id;
+	    $token=$urlParams.token;
 	    //alert($list_id);
 	    $i = 0;
 	    while(data[$i])
 		{
 		    if(data[$i].id==$list_id)
 			{
-			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + '&token='+ $token + $endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
+			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + '&token='+ $token +$endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
 			}
 			$i++;
 		}
-		$.ajaxSetup({
-		headers : {
-		'Authorization' : 'Bearer '+$token
-		}
-		});
+		
+	    $.ajaxSetup({
+	    headers : {
+	    'Authorization' : 'Bearer '+$token
+	    }
+	    });
 	    $.getJSON($racine+"me/tasks.json",function(data2)
 	    {
 		
@@ -99,24 +100,6 @@ $(document).ready(function(){
 			    $node.appendChild($textnode);
 			    document.getElementById("myList"+$list_id).appendChild($node);
 			    //alert("wesh ziva");
-			    //$(".list").append("<p>"+ caca +"</p>");
-//			    $node=document.createElement("LI");
-			    $node2=document.createElement("button");
-			    $node3=document.createElement("span");
-//			    $node.setAttribute("id", data2[$j].id);
-			    $node2.setAttribute("id", data2[$j].id);
-			    $node3.setAttribute("class", "glyphicon glyphicon-pencil");
-			    $node2.setAttribute("class","btn btn-default btn-lg");
-			    $node2.setAttribute("value","edit_one_task");
-//			    //$node2.setAttribute("type","edit_one_task");
-			    $node2.setAttribute("onClick","edit_task(this.id)");
-//			    $textnode=document.createTextNode(data2[$j].title);
-			    $textnode2=document.createTextNode('Edit');
-//			    $node.appendChild($textnode);
-			    $node2.appendChild($textnode2);
-			    $node2.appendChild($node3);
-//			    document.getElementById("myList"+$list_id).appendChild($node);
-			    document.getElementById("myList"+$list_id).appendChild($node2);
 			}
 			$j++;
 		}
@@ -129,7 +112,7 @@ $(document).ready(function(){
        $i = 0;
        while(data[$i])
 	{
-	  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + '&token='+ $token +$endlink + data[$i].title  + "</a>" +  "</h2>" +$enddiv);
+	  $(".row").append($newdivtitle + "<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + $endlink + data[$i].title  + "</a>" +  "</h2>" +$enddiv);
 	  $i++;
 	}
     }
@@ -156,8 +139,8 @@ $(document).ready(function(){
 //    });
 //  });
      $("button").click(function(e){
-	// alert(this.value);
-	 //alert(this.id);
+	 alert(this.value);
+	 alert(this.id);
 	 if(this.value == "remove_list")
 	     {
 		 $.ajaxSetup({
@@ -179,29 +162,92 @@ $(document).ready(function(){
 	    {
 		// renvoyer sur une page avec formulaire 
 		// puis faire post /me/task avec les données
-		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id+'&token='+$token;
+		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id+"&token="+$token;
 	    }
 	    
 	if(this.value == "delete_task")
 	    {
 		// renvoyer sur une page pour sélectionner la tache 
 		// puis faire delete /me/task/task_id
-		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id+'&token='+$token;
+		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id+"&token="+$token;
 
 	    }
-	    
-	 if(this.value == "add_list")
-	     {
-
-		window.location = "http://localhost:81/DSMWare/addlist.html?token="+$token;
-	     }
      });
+     
+ 
    });
 });
 
-function edit_task(task_id)
-{
-    $list_id=$urlParams.id;
-    window.location = "http://localhost:81/DSMWare/edittask.html?id="+task_id+'&token='+$token;
-}
 
+
+
+$( "#add_task_form" ).submit(function( event ) {
+ //alert($('#add_task_form').serialize());
+  // Stop form from submitting normally
+  event.preventDefault();
+ alert("caca");
+
+dataString = $("#add_task_form").serialize();
+            //alert("ok");
+            //get the form data using another method
+            var task = $("input#task").val();
+	    $list_id=$urlParams.id;
+            dataString = '{"title"="' + task +'", "list_id"="'+$list_id+'"}';
+            alert(dataString);
+            //make the AJAX request, dataType is set to json
+            //meaning we are expecting JSON data in response from the server
+		$.ajaxSetup({
+		headers : {
+		'Authorization' : 'Bearer '+$token
+		}
+		});
+	    
+            $.ajax({
+                type: "POST",
+                url: "http://api.wunderlist.com/me/tasks",
+                data: dataString,
+                dataType: "json",
+                
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                    //our country code was correct so we have some information to display
+                     if(data.success){
+//                         $("#ajaxResponse").html("");
+//                         $("#ajaxResponse").append("<b>Country Code:</b> " + data.countryInfo.code + "");
+//                         $("#ajaxResponse").append("<b>Country Name:</b> " + data.countryInfo.name + "");
+//                         $("#ajaxResponse").append("<b>Continent:</b> " + data.countryInfo.continent + "");
+//                         $("#ajaxResponse").append("<b>Region:</b> " + data.countryInfo.region + "");
+//                         $("#ajaxResponse").append("<b>Life Expectancy:</b> " + data.countryInfo.lifeExpectancy + "");
+//                         $("#ajaxResponse").append("<b>GNP:</b> " + data.countryInfo.gnp + "");
+alert("oh yes");
+                     }
+                     //display error message
+                     else {
+                         //$("#ajaxResponse").html("<div><b>Country code in Invalid!</b></div>");
+			 alert("mmm");
+                     }
+                },
+                
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                     console.log("Something really bad happened " + textStatus);
+                      $("#ajaxResponse").html(jqXHR.responseText);
+                },
+                
+                //capture the request before it was sent to server
+                beforeSend: function(jqXHR, settings){
+                    //adding some Dummy data to the request
+                    //settings.data += "&dummyData=whatever";
+                    //disable the button until we get the response
+                    $('#add_task_button').attr("disabled", true);
+                },
+                
+                //this is called after the response or error functions are finsihed
+                //so that we can take some action
+                complete: function(jqXHR, textStatus){
+                    //enable the button
+                    $('#add_task_button').attr("disabled", false);
+                }
+      
+            });  
+});
