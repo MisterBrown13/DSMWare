@@ -127,7 +127,7 @@ dataString = $("#edit_task_form").serialize();
             //get the form data using another method
             var task = $("input#task").val();
 	    $task_id=$urlParams.id;
-            dataString = 'note=' + task;
+            dataString = 'title=' + task;
             alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
@@ -139,7 +139,7 @@ dataString = $("#edit_task_form").serialize();
 		});
             $.ajax({
                 type: "PUT",
-                url: "https://api.wunderlist.com/me/"+$task_id,
+                url: "https://api.wunderlist.com/"+$task_id,
                 data: dataString,
                 dataType: "json",
                 

@@ -166,7 +166,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "https://api.wunderlist.com/me/"+this.id,
+		url: "https://api.wunderlist.com/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");

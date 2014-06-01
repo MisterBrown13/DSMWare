@@ -161,7 +161,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "http://api.wunderlist.com/me/list/"+this.id,
+		url: "http://api.wunderlist.com/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
@@ -198,7 +198,7 @@ function remove_task(id)
 		}
 		});
     $.ajax({
-		url: "http://api.wunderlist.com/me/task/"+id,
+		url: "http://api.wunderlist.com/"+id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");

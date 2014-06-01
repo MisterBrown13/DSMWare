@@ -149,7 +149,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "http://api.wunderlist.com/me/"+this.id,
+		url: "http://api.wunderlist.com/"+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
