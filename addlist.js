@@ -1,6 +1,4 @@
- 
-$(document).ready(function(){
-    
+     
    function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd   = url.indexOf("#") + 1 || url.length + 1,
@@ -25,6 +23,10 @@ $(document).ready(function(){
     }
     return parms;
     }
+ 
+ 
+$(document).ready(function(){
+
    
    
    //$url = "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/2";
@@ -238,7 +240,7 @@ dataString = $("#add_list_form").serialize();
                 //if received a response from the server
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
-                     if(data.success){
+                     if(data.id){
 //                         $("#ajaxResponse").html("");
 //                         $("#ajaxResponse").append("<b>Country Code:</b> " + data.countryInfo.code + "");
 //                         $("#ajaxResponse").append("<b>Country Name:</b> " + data.countryInfo.name + "");
@@ -246,7 +248,8 @@ dataString = $("#add_list_form").serialize();
 //                         $("#ajaxResponse").append("<b>Region:</b> " + data.countryInfo.region + "");
 //                         $("#ajaxResponse").append("<b>Life Expectancy:</b> " + data.countryInfo.lifeExpectancy + "");
 //                         $("#ajaxResponse").append("<b>GNP:</b> " + data.countryInfo.gnp + "");
-alert("oh yes");
+		    window.location = "http://localhost:81/DSMWare/list.html?id="+data.id+"&token="+$token;
+
                      }
                      //display error message
                      else {

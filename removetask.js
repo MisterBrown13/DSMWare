@@ -1,7 +1,5 @@
  
-$(document).ready(function(){
-    
-   function parseURLParams(url) {
+    function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd   = url.indexOf("#") + 1 || url.length + 1,
         query = url.slice(queryStart, queryEnd - 1),
@@ -25,6 +23,11 @@ $(document).ready(function(){
     }
     return parms;
     }
+ 
+ 
+$(document).ready(function(){
+    
+
    
    
    //$url = "http://127.0.0.1:81/DSMWareServer/web/app_dev.php/me/list/2";
