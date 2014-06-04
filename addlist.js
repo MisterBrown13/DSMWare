@@ -57,7 +57,7 @@ $(document).ready(function(){
     }
     });
    
-   $.getJSON($root+"me/lists.json",function(data)
+   $.getJSON($root+"me/lists",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -83,7 +83,7 @@ $(document).ready(function(){
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	    $.getJSON($root+"me/tasks.json",function(data2)
+	    $.getJSON($root+"me/tasks",function(data2)
 	    {
 		
 		$j=0;
@@ -214,7 +214,6 @@ $( "#add_list_form" ).submit(function( event ) {
  //alert($('#add_task_form').serialize());
   // Stop form from submitting normally
   event.preventDefault();
- alert("caca");
 
 dataString = $("#add_list_form").serialize();
             //alert("ok");

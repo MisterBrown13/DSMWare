@@ -56,7 +56,7 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON($root+"me/lists.json",function(data)
+   $.getJSON($root+"me/lists",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -83,7 +83,7 @@ $(document).ready(function(){
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	    $.getJSON($root+"me/tasks.json",function(data2)
+	    $.getJSON($root+"me/tasks",function(data2)
 	    {
 		
 		$j=0;
