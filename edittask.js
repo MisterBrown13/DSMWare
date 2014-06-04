@@ -50,7 +50,7 @@ $(document).ready(function(){
    $newul = '<ul id="myList';
    $endul = '</ul>';
    //alert('test');
-   // 1- récupération de la tache avec le bon id 
+   // 1- rï¿½cupï¿½ration de la tache avec le bon id 
      $x = location.search;
    $urlParams = parseURLParams($x);
    $.ajaxSetup({
@@ -58,18 +58,19 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data)
+   $.getJSON($root+"me/tasks.json",function(data)
    {
        $i = 0;
        $x = location.search;
        $urlParams = parseURLParams($x);
-       //alert($urlParams);
+       
        if($urlParams.id)
 	{
 	    $task_id=$urlParams.id;
 	    $token=$urlParams.token;
 	}
 	//alert($task_id);
+       if(data){
        while(data[$i])
 	   {
 	       if(data[$i].id==$task_id)
@@ -79,12 +80,13 @@ $(document).ready(function(){
 		   }
 	       $i++;
 	   }
+       }
 	   	$.ajaxSetup({
 		headers : {
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	  $.getJSON("https://api.wunderlist.com/me/lists.json",function(data2)
+	  $.getJSON($root+"me/lists.json",function(data2)
 	    {
 		$j=0;
 		//alert($list_id);
@@ -106,7 +108,7 @@ $(document).ready(function(){
 		    $textnode=document.createTextNode(data[$g].title);
 		    $node.appendChild($textnode);
 		    document.getElementById("myList"+$list_id).appendChild($node);
-		    // rajout à coté du formulaire
+		    // rajout ï¿½ cotï¿½ du formulaire
 		    //$node2=document.createElement("form");
 		    //$node2.setAttribute("id","edit_task_form");
 		    
@@ -139,7 +141,7 @@ dataString = $("#edit_task_form").serialize();
 		});
             $.ajax({
                 type: "PUT",
-                url: "https://api.wunderlist.com/"+$task_id,
+                url: $root+$task_id,
                 data: dataString,
                 dataType: "json",
                 

@@ -25,7 +25,7 @@ dataString = $("#login").serialize();
 	    
             $.ajax({
                 type: "POST",
-                url: "https://api.wunderlist.com/login/",
+                url: $root+"login/",
                 data: dataString,
                 dataType: "json",
                 

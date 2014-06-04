@@ -56,7 +56,7 @@ $(document).ready(function(){
     'Authorization' : 'Bearer '+$urlParams.token
     }
     });
-   $.getJSON("http://api.wunderlist.com/me/lists.json",function(data)
+   $.getJSON($root+"me/lists.json",function(data)
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
@@ -68,6 +68,7 @@ $(document).ready(function(){
 	    $list_id=$urlParams.id;
 	    //alert($list_id);
 	    $i = 0;
+	    //if(data){
 	    while(data[$i])
 		{
 		    if(data[$i].id==$list_id)
@@ -76,17 +77,20 @@ $(document).ready(function(){
 			}
 			$i++;
 		}
+	    //}
 		$.ajaxSetup({
 		headers : {
 		'Authorization' : 'Bearer '+$token
 		}
 		});
-	    $.getJSON("http://api.wunderlist.com/me/tasks.json",function(data2)
+	    $.getJSON($root+"me/tasks.json",function(data2)
 	    {
 		
 		$j=0;
 		//alert($j);
 		//$(".row").append("<p>"+ caca +"</p>");
+		//if(data2)
+		//  {
 		while(data2[$j])
 		{
 		
@@ -120,6 +124,7 @@ $(document).ready(function(){
 			}
 			$j++;
 		}
+		  //}
 		//alert($j);
 	    });
 	    
@@ -136,10 +141,10 @@ $(document).ready(function(){
     
     
 //	$("li").click(function(){
-//	    // récupérer l'id du li'
+//	    // rï¿½cupï¿½rer l'id du li'
 //	    $id = this.id;
 //	    alert("ssfe");
-//	    //puis récupérer message avec getJSON
+//	    //puis rï¿½cupï¿½rer message avec getJSON
 //	  $.getJSON("http://localhost:81/DSMWare/me/"+$id+"/messages.json",function(data){
 //	  alert("caca");// puis afficher en dessous de la tache
 //	  //$("h1").append(" <b>"+ data.ip +"</b>.");
@@ -166,7 +171,7 @@ $(document).ready(function(){
 		}
 		});
 		$.ajax({
-		url: "https://api.wunderlist.com/"+this.id,
+		url: $root+this.id,
 		type: 'DELETE',
 		success: function(result) {
 		    alert("ok");
@@ -178,13 +183,13 @@ $(document).ready(function(){
 	if(this.value == "add_task")
 	    {
 		// renvoyer sur une page avec formulaire 
-		// puis faire post /me/task avec les données
+		// puis faire post /me/task avec les donnï¿½es
 		window.location = "http://localhost:81/DSMWare/addtask.html?id="+this.id+'&token='+$token;
 	    }
 	    
 	if(this.value == "delete_task")
 	    {
-		// renvoyer sur une page pour sélectionner la tache 
+		// renvoyer sur une page pour sï¿½lectionner la tache 
 		// puis faire delete /me/task/task_id
 		window.location = "http://localhost:81/DSMWare/removetask.html?id="+this.id+'&token='+$token;
 
