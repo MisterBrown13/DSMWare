@@ -110,11 +110,13 @@ $(document).ready(function(){
 //			    $node=document.createElement("LI");
 			    $node2=document.createElement("button");
 			    $node3=document.createElement("span");
+			    
 //			    $node.setAttribute("id", data2[$j].id);
 			    $node2.setAttribute("id", data2[$j].id);
 			    $node3.setAttribute("class", "glyphicon glyphicon-pencil");
 			    $node2.setAttribute("class","btn btn-default btn-lg");
 			    $node2.setAttribute("value","edit_one_task");
+			    
 //			    //$node2.setAttribute("type","edit_one_task");
 			    $node2.setAttribute("onClick","edit_task(this.id)");
 //			    $textnode=document.createTextNode(data2[$j].title);
@@ -122,8 +124,43 @@ $(document).ready(function(){
 //			    $node.appendChild($textnode);
 			    $node2.appendChild($textnode2);
 			    $node2.appendChild($node3);
+			    
 //			    document.getElementById("myList"+$list_id).appendChild($node);
 			    document.getElementById("myList"+$list_id).appendChild($node2);
+			   
+			    $node4=document.createElement("button");
+			    $node5=document.createElement("span");
+			    
+			    $node4.setAttribute("id", data2[$j].id);
+			    $node5.setAttribute("class", "glyphicon glyphicon-envelope");
+			    $node4.setAttribute("class","btn btn-default btn-lg");
+			    $node4.setAttribute("value","comment_one_task");
+			    
+			    $node4.setAttribute("onClick","comment_task(this.id)");
+			    
+			    $textnode3=document.createTextNode('Comments');
+			    
+			    $node4.appendChild($textnode3);
+			    $node4.appendChild($node5);
+			    document.getElementById("myList"+$list_id).appendChild($node4);
+			    
+			    
+			    $node6=document.createElement("button");
+			    $node7=document.createElement("span");
+			    
+			    $node6.setAttribute("id", data2[$j].id);
+			    $node7.setAttribute("class", "glyphicon glyphicon-envelope");
+			    $node6.setAttribute("class","btn btn-default btn-lg");
+			    $node6.setAttribute("value","comment_one_task");
+			    
+			    $node6.setAttribute("onClick","comment_task(this.id)");
+			    
+			    $textnode4=document.createTextNode('Add reminder');
+			    
+			    $node6.appendChild($textnode4);
+			    $node6.appendChild($node7);
+			    document.getElementById("myList"+$list_id).appendChild($node6);
+		
 			}
 			$j++;
 		}
@@ -213,3 +250,14 @@ function edit_task(task_id)
     window.location = "http://localhost:81/DSMWare/edittask.html?id="+task_id+'&token='+$token;
 }
 
+function comment_task(task_id)
+{
+    $list_id=$urlParams.id;
+    window.location = "http://localhost:81/DSMWare/commenttask.html?id="+task_id+'&token='+$token;
+}
+
+function add_reminder(task_id)
+{
+    $list_id=$urlParams.id;
+    window.location = "http://localhost:81/DSMWare/addreminder.html?id="+task_id+'&token='+$token;
+}

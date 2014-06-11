@@ -7,12 +7,12 @@ function add_nav()
     $x = location.search;
     $urlParams = parseURLParams($x);
     $token = $urlParams.token;
-    $node=document.createElement("A");
-    $node.setAttribute("href", "http://localhost:81/DSMWare/list.html?token="+$token);
+    $nodenav=document.createElement("A");
+    $nodenav.setAttribute("href", "http://localhost:81/DSMWare/list.html?token="+$token);
 
     $textnode=document.createTextNode("All lists");
-    $node.appendChild($textnode);
-    document.getElementById("nav").appendChild($node);
+    $nodenav.appendChild($textnode);
+    document.getElementById("nav").appendChild($nodenav);
 
 }
 
