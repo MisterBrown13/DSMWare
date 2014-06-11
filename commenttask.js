@@ -170,7 +170,7 @@ dataString = $("#comment_task_form").serialize();
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
                      if(data){
-			    window.location = "http://localhost:81/DSMWare/commenttask.html?task_id="+$task_id+"&token="+$token;
+			    window.location = "http://localhost:81/DSMWare/commenttask.html?id="+$task_id+"&token="+$token;
                      }
                      //display error message
                      else {
