@@ -153,7 +153,7 @@ $(document).ready(function(){
 			    $node6.setAttribute("class","btn btn-default btn-lg");
 			    $node6.setAttribute("value","comment_one_task");
 			    
-			    $node6.setAttribute("onClick","comment_task(this.id)");
+			    $node6.setAttribute("onClick","add_reminder(this.id)");
 			    
 			    $textnode4=document.createTextNode('Add reminder');
 			    
