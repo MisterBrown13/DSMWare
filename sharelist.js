@@ -222,7 +222,7 @@ dataString = $("#share_list_form").serialize();
             //get the form data using another method
             var email = $("input#email").val();
 	    
-            dataString = 'email=' + email;
+            dataString = 'recipient=' + email;
             alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server

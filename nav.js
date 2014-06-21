@@ -16,4 +16,15 @@ function add_nav()
 
 }
 
+function add_login()
+{
+    $nodenav=document.createElement("A");
+    $nodenav.setAttribute("href", "http://localhost:81/DSMWare/design.html");
+
+    $textnode=document.createTextNode("    Login");
+    $nodenav.appendChild($textnode);
+    document.getElementById("nav").appendChild($nodenav);
+}
+
 add_nav();
+add_login();

@@ -77,6 +77,7 @@ $(document).ready(function(){
 		    if(data[$i].id==$list_id)
 			{
 			    $(".row").append($newdivtitle +"<h2>"+ $newlink + $linklistaddress + "?id=" + data[$i].id + '&token='+ $token + $endlink + data[$i].title  + "</a>"+" " + $newadd + data[$i].id +$endadd + " " + $newdeletetask +  data[$i].id +$enddeletetask + " " + $newdeletelist + data[$i].id + $enddeletelist + "</h2>" + $newul + data[$i].id + '">'+ $endul +$enddiv);
+			   
 			}
 			$i++;
 		}
@@ -94,6 +95,22 @@ $(document).ready(function(){
 		//$(".row").append("<p>"+ caca +"</p>");
 		//if(data2)
 		//  {
+		
+		 $node8=document.createElement("button");
+			    $node9=document.createElement("span");
+			    
+			    $node8.setAttribute("id", data2[$j].id);
+			    $node9.setAttribute("class", "glyphicon glyphicon-envelope");
+			    $node8.setAttribute("class","btn btn-default btn-lg");
+			    $node8.setAttribute("value","share_one_task");
+			    
+			    $node8.setAttribute("onClick","share_list()");
+			    
+			    $textnode5=document.createTextNode('Share list');
+			    
+			    $node8.appendChild($textnode5);
+			    $node8.appendChild($node9);
+			    document.getElementById("row").appendChild($node8);
 		while(data2[$j])
 		{
 		
@@ -162,21 +179,7 @@ $(document).ready(function(){
 			    document.getElementById("myList"+$list_id).appendChild($node6);
 			    
 			    
-			    $node8=document.createElement("button");
-			    $node9=document.createElement("span");
 			    
-			    $node8.setAttribute("id", data2[$j].id);
-			    $node9.setAttribute("class", "glyphicon glyphicon-envelope");
-			    $node8.setAttribute("class","btn btn-default btn-lg");
-			    $node8.setAttribute("value","share_one_task");
-			    
-			    $node8.setAttribute("onClick","share_list()");
-			    
-			    $textnode5=document.createTextNode('Share list');
-			    
-			    $node8.appendChild($textnode5);
-			    $node8.appendChild($node9);
-			    document.getElementById("row").appendChild($node8);
 		
 			}
 			$j++;
