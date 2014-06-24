@@ -125,7 +125,6 @@ $(document).ready(function(){
 $( "#edit_task_form" ).submit(function( event ) {
    // alert("ok");
       event.preventDefault();
- //alert("caca");
 
 dataString = $("#edit_task_form").serialize();
             //alert("ok");

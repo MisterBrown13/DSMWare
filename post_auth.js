@@ -4,16 +4,13 @@ $( "#login_form" ).submit(function( event ) {
  //alert($('#add_task_form').serialize());
   // Stop form from submitting normally
   event.preventDefault();
- //alert("caca");
 
 dataString = $("#login").serialize();
-            //alert("ok");
             //get the form data using another method
             var email = $("input#login").val();
 			var password = $("input#pwd").val();
 	    
             dataString = 'email=' + email +'&password='+ password +'';
-            //alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
 		$.ajaxSetup({
@@ -21,7 +18,6 @@ dataString = $("#login").serialize();
 		'Content-Type' : "application/x-www-form-urlencoded"
 		}
 		});
-		alert('test');
 	    
             $.ajax({
                 type: "POST",
@@ -33,13 +29,6 @@ dataString = $("#login").serialize();
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
                      if(data.token){
-//                         $("#ajaxResponse").html("");
-//                         $("#ajaxResponse").append("<b>Country Code:</b> " + data.countryInfo.code + "");
-//                         $("#ajaxResponse").append("<b>Country Name:</b> " + data.countryInfo.name + "");
-//                         $("#ajaxResponse").append("<b>Continent:</b> " + data.countryInfo.continent + "");
-//                         $("#ajaxResponse").append("<b>Region:</b> " + data.countryInfo.region + "");
-//                         $("#ajaxResponse").append("<b>Life Expectancy:</b> " + data.countryInfo.lifeExpectancy + "");
-//                         $("#ajaxResponse").append("<b>GNP:</b> " + data.countryInfo.gnp + "");
 $token = data.token;
 window.location = "http://localhost:81/DSMWare/list.html?token="+$token;
                    }

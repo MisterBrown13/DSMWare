@@ -65,12 +65,10 @@ $(document).ready(function(){
    {
        $x = location.search;
        $urlParams = parseURLParams($x);
-       //alert($urlParams.id);
        if($x)
 	{
 	    $list_id=$urlParams.id;
 	    $token = $urlParams.token;
-	    //alert($list_id);
 	    $i = 0;
 	    if(data){
 	    while(data[$i])
@@ -97,7 +95,6 @@ $(document).ready(function(){
 		
 		    if($list_id == data2[$j].list_id)
 			{
-			    //$(".list").append("<p>"+ caca +"</p>");
 			    $node=document.createElement("LI");
 			    $node2=document.createElement("button");
 			    $node3=document.createElement("span");
@@ -141,7 +138,6 @@ $(document).ready(function(){
 //	    alert("ssfe");
 //	    //puis r�cup�rer message avec getJSON
 //	  $.getJSON("http://localhost:81/DSMWare/me/"+$id+"/messages.json",function(data){
-//	  alert("caca");// puis afficher en dessous de la tache
 //	  //$("h1").append(" <b>"+ data.ip +"</b>.");
 //	  });
 //    });
@@ -211,5 +207,4 @@ function remove_task(id)
 		    window.location = "http://localhost:81/DSMWare/list.html?id="+$list_id+"&token="+$token;
 		}
 		});
-		alert('end');
 }

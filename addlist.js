@@ -90,21 +90,18 @@ $(document).ready(function(){
 		
 		$j=0;
 		//alert($j);
-		//$(".row").append("<p>"+ caca +"</p>");
 		if(data2){
 		while(data2[$j])
 		{
 		
 		    if($list_id == data2[$j].list_id)
 			{
-			    //$(".list").append("<p>"+ caca +"</p>");
 			    $node=document.createElement("LI");
 			    $node.setAttribute("id", data2[$j].id);
 			    $textnode=document.createTextNode(data2[$j].title);
 			    $node.appendChild($textnode);
 			    document.getElementById("myList"+$list_id).appendChild($node);
 			    //alert("wesh ziva");
-			    //$(".list").append("<p>"+ caca +"</p>");
 //			    $node=document.createElement("LI");
 			    $node2=document.createElement("button");
 			    $node3=document.createElement("span");
@@ -149,7 +146,6 @@ $(document).ready(function(){
 //	    alert("ssfe");
 //	    //puis r�cup�rer message avec getJSON
 //	  $.getJSON("http://localhost:81/DSMWare/me/"+$id+"/messages.json",function(data){
-//	  alert("caca");// puis afficher en dessous de la tache
 //	  //$("h1").append(" <b>"+ data.ip +"</b>.");
 //	  });
 //    });
