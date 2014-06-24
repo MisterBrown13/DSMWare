@@ -101,7 +101,6 @@ $(document).ready(function(){
 			    $textnode=document.createTextNode(data2[$j].title);
 			    $node.appendChild($textnode);
 			    document.getElementById("myList"+$list_id).appendChild($node);
-			    //alert("wesh ziva");
 //			    $node=document.createElement("LI");
 			    $node2=document.createElement("button");
 			    $node3=document.createElement("span");
@@ -219,7 +218,6 @@ dataString = $("#add_list_form").serialize();
             var list = $("input#list").val();
 	    
             dataString = 'title=' + list;
-            alert(dataString);
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
 	    	 $.ajaxSetup({
@@ -237,20 +235,12 @@ dataString = $("#add_list_form").serialize();
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
                      if(data.id){
-//                         $("#ajaxResponse").html("");
-//                         $("#ajaxResponse").append("<b>Country Code:</b> " + data.countryInfo.code + "");
-//                         $("#ajaxResponse").append("<b>Country Name:</b> " + data.countryInfo.name + "");
-//                         $("#ajaxResponse").append("<b>Continent:</b> " + data.countryInfo.continent + "");
-//                         $("#ajaxResponse").append("<b>Region:</b> " + data.countryInfo.region + "");
-//                         $("#ajaxResponse").append("<b>Life Expectancy:</b> " + data.countryInfo.lifeExpectancy + "");
-//                         $("#ajaxResponse").append("<b>GNP:</b> " + data.countryInfo.gnp + "");
 		    window.location = "http://localhost:81/DSMWare/list.html?id="+data.id+"&token="+$token;
 
                      }
                      //display error message
                      else {
                          //$("#ajaxResponse").html("<div><b>Country code in Invalid!</b></div>");
-			 alert("mmm");
                      }
                 },
                 
