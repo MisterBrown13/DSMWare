@@ -152,8 +152,7 @@ $(document).ready(function(){
 //    });
 //  });
      $("button").click(function(e){
-	 alert(this.value);
-	 alert(this.id);
+	
 	 if(this.value == "remove_list")
 	     {
 		$.ajaxSetup({
@@ -165,7 +164,6 @@ $(document).ready(function(){
 		url: $root+this.id,
 		type: 'DELETE',
 		success: function(result) {
-		    alert("ok");
 		    window.location = "http://localhost:81/DSMWare/list.html";
 		}
 		});
@@ -202,7 +200,7 @@ function remove_task(id)
 		url: $root+id,
 		type: 'DELETE',
 		success: function(result) {
-		    alert("ok");
+		    
 		    $list_id=$urlParams.id;
 		    window.location = "http://localhost:81/DSMWare/list.html?id="+$list_id+"&token="+$token;
 		}

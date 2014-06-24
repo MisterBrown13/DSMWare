@@ -132,7 +132,7 @@ dataString = $("#edit_task_form").serialize();
             var task = $("input#task").val();
 	    $task_id=$urlParams.id;
             dataString = 'title=' + task;
-            alert(dataString);
+            
             //make the AJAX request, dataType is set to json
             //meaning we are expecting JSON data in response from the server
 	    	$.ajaxSetup({
@@ -150,13 +150,13 @@ dataString = $("#edit_task_form").serialize();
                 //if received a response from the server
                 success: function( data, textStatus, jqXHR) {
                     //our country code was correct so we have some information to display
-                     if(data.success){
+                     if(data){
 			    window.location = "http://localhost:81/DSMWare/list.html?token="+$token;
                      }
                      //display error message
                      else {
                          //$("#ajaxResponse").html("<div><b>Country code in Invalid!</b></div>");
-			 alert("mmm");
+			 
                      }
                 },
                 

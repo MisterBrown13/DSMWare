@@ -124,8 +124,6 @@ $(document).ready(function(){
     
     
      $("button").click(function(e){
-	 alert(this.value);
-	 alert(this.id);
 	 if(this.value == "remove_list")
 	     {
 		 $.ajaxSetup({
@@ -137,7 +135,6 @@ $(document).ready(function(){
 		url: $root+this.id,
 		type: 'DELETE',
 		success: function(result) {
-		    alert("ok");
 		    window.location = "http://localhost:81/DSMWare/list.html?token="+$token;
 		}
 		});
@@ -186,7 +183,6 @@ dataString = $("#add_task_form").serialize();
 		'Content-Type' : "application/x-www-form-urlencoded"
 		}
 		});
-		alert('test');
 	    
             $.ajax({
                 type: "POST",
@@ -204,7 +200,6 @@ dataString = $("#add_task_form").serialize();
                      }
                      //display error message
                      else {
-			 alert("mmm");
                      }
                 },
                 
